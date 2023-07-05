@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="csscode/calculatorstyle.css">
+    <title>BMI Calculator</title>
+    <script src="js/calculator.js"></script>
+</head>
+<body>
+  <ul>
+    <li><a href="index.html">My Profile</a></li>
+    <li><a href="calculator.html">Calculator</a></li>
+  </ul>
+  
+  <div class="container">
+    <h1>BMI CALCULATOR</h1>
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter your name" required>
+
+    <label for="age">Age:</label>
+    <input type="text" id="age" placeholder="Enter your age" required>
+    
+  
+
+<label for="activitylevel">Exercise Level:</label>
+<select id="activitylevel">
+  <option value="not active">Not active</option>
+  <option value="rarely exercise">Rarely exercise</option>
+  <option value="regularly doing exercise">Regularly doing exercise</option>
+</select>
+ 
+<label for="goal">What is your goal:</label>
+<select id="goal">
+  <option value="weight loss">Weight loss</option>
+  <option value="weight maintenance">Weight maintenance</option>
+  <option value="muscle gain">Muscle gain</option>
+</select>
+    
+<label for="tweight">Target weight(kg):</label>
+    <input type="text" id="tweight" placeholder="Enter your target weight" required> 
+
+    <label for="blood">Blood pressure (mmHg):</label>
+    <input type="blood" id="blood" placeholder="Enter your blood pressure read" required> 
+
+    <label for="weight">Weight(kg):</label>
+    <input type="text" id="weight" placeholder="Enter your weight" required> 
+
+    <label for="height">Height(cm):</label>
+    <input type="text" id="height" placeholder="Enter your height" required>
+    
+    <button onclick="calcBMI()">Calculate Your BMI</button>
+    <div id="result"></div>
+  </div>
+
+  
+
+  <footer>
+    &copy; 2023 Rafiqi Hayazi
+  </footer>
+</body>
+</html>
