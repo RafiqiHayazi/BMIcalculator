@@ -1,34 +1,90 @@
 
-    function calcBMI() {
-      var weightInput = document.getElementById("weight");
-      var heightInput = document.getElementById("height");
-      var resultDiv = document.getElementById("result");
-      var nameInput = document.getElementById("name");
-      var ageInput = document.getElementById("age");
-      var activitylevelInput = document.getElementById("activitylevel");
-      var goalInput = document.getElementById("goal");
-      var bloodInput = document.getElementById("blood");
-      var tweightInput = document.getElementById("tweight");
-     
+function calcBMI() {
+  var nameInput = document.getElementById("name");
+  var ageInput = document.getElementById("age");
+  var genderInput = document.getElementById("gender");
+  var weightInput = document.getElementById("weight");
+  var heightInput = document.getElementById("height");
+  var lifestyleInput = document.getElementById("lifestyle");
+  var weightUnitInput = document.getElementById("weightUnit");
+  var resultDiv = document.getElementById("result");
 
-      
-      var weight = parseFloat(weightInput.value);
-      var height = parseFloat(heightInput.value) / 100; // convert cm to meters
-      var name = nameInput.value;
-      var age = parseFloat(ageInput.value);
-      var activitylevel = activitylevelInput.value;
-      var goal = goalInput.value;
-      var blood = parseFloat(bloodInput.value);
-      var tweight = parseFloat(tweightInput.value);
-      
-      if (isNaN(weight) || isNaN(height) || isNaN(age) || isNaN(blood) || isNaN(tweight)) {
-        alert("Please enter valid values for weight and height.");
-        return;
-      }
-      
-      var bmi = weight / (height * height);
-      bmi = bmi.toFixed(2); // round to 2 decimal places
-      
-      resultDiv.innerHTML = "Your name is " + name + " and your age is "+ age + ". " + "You "+ activitylevel + " and your target weight is "+ tweight +  "kg. " + "Your goal is to have "+ goal + " in the future. " + "Your blood pressure read is "+ blood +  " mmHg. "   +   " Your BMI is "+ bmi ;
-    }
+  var name = nameInput.value;
+  var age = parseInt(ageInput.value);
+  var gender = genderInput.value;
+  var weight = parseFloat(weightInput.value);
+  var height = parseFloat(heightInput.value) / 100; // convert cm to meters
+  var lifestyle = lifestyleInput.value;
+  var weightUnit = weightUnitInput.value;
 
+  if (name === "" || ageInput.value === "" || gender === "" || weightInput.value === "" || heightInput.value === "" || lifestyle === "") {
+    alert("Please fill in all the input fields.");
+    return;
+  }
+
+  if (!/^[a-zA-Z]+$/.test(name)) {
+    alert("Please enter a valid name using only alphabetic characters.");
+    return;
+  }
+
+  if (isNaN(age) || age <= 0 || age > 100) {
+    alert("Please enter a valid age between 1 and 100.");
+    return;
+  }
+
+  if (gender === "") {
+    alert("Please select your gender.");
+    return;
+  }
+
+  if (isNaN(weight) || weight <= 0) {
+    alert("Please enter a valid weight.");
+    return;
+  }
+
+  if (isNaN(height) || height <= 0) {
+    alert("Please enter a valid height.");
+    return;
+  }
+
+  if (weightUnit === "lbs") {
+    // Convert weight from pounds to kilograms
+    weight = weight / 2.205;
+  }
+
+  var bmi = weight / (height * height);
+  bmi = bmi.toFixed(2); // round to 2 decimal places
+
+  var bmiRange = "";
+  var interpretation = "";
+
+  if (bmi < 18.5) {
+    bmiRange = "Underweight";
+    interpretation = "You are underweight. <a href='https://www.nhs.uk/live-well/healthy-weight/managing-your-weight/healthy-ways-to-gain-weight/'>Click here</a> for information on managing your weight.";
+  } else if (bmi >= 18.5 && bmi < 24.9) {
+    bmiRange = "Normal weight";
+    interpretation = "You have a normal weight.";
+  } else if (bmi >= 25 && bmi < 29.9) {
+    bmiRange = "Overweight";
+    interpretation = "You are overweight.";
+  } else {
+    bmiRange = "Obese";
+    interpretation = "You are obese. <a href='https://www.nhlbi.nih.gov/health/educational/lose_wt/eat/calories.htm'>Click here</a> for information on managing your weight.";
+  }
+
+  resultDiv.innerHTML = "Name: " + name + "<br> Age: " + age + "<br> Gender: " + gender + "<br> Lifestyle: " + lifestyle + "<br><br> Your BMI is " + bmi + "<br> BMI Range: " + bmiRange+ "<br> Interpretation: " + interpretation;
+}
+
+function switchWeightUnit() {
+  var weightUnitInput = document.getElementById("weightUnit");
+  var weightUnitLabel = document.getElementById("weightUnitLabel");
+  var weightLabel = document.getElementById("weightLabel");
+
+  if (weightUnitInput.value === "kg") {
+    weightUnitLabel.innerHTML = "Weight Unit: kg";
+    weightLabel.innerHTML = "Weight (kg):";
+  } else {
+    weightUnitLabel.innerHTML = "Weight Unit: lbs";
+    weightLabel.innerHTML = "Weight (lbs):";
+  }
+}
