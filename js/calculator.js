@@ -72,7 +72,23 @@ function calcBMI() {
     interpretation = "You are obese. <a href='https://www.nhlbi.nih.gov/health/educational/lose_wt/eat/calories.htm'>Click here</a> for information on managing your weight.";
   }
 
-  resultDiv.innerHTML = "Name: " + name + "<br> Age: " + age + "<br> Gender: " + gender + "<br> Lifestyle: " + lifestyle + "<br><br> Your BMI is " + bmi + "<br> BMI Range: " + bmiRange+ "<br> Interpretation: " + interpretation;
+  var idealWeight = 0;
+  if (gender === "Male") {
+    idealWeight = 22 * (height * height);
+  } else if (gender === "Female") {
+    idealWeight = 21 * (height * height);
+  }
+  idealWeight = idealWeight.toFixed(2);
+
+  var targetedWeight = 0;
+  if (bmiRange === "Underweight" || bmiRange === "Normal weight") {
+    targetedWeight = idealWeight - weight;
+  } else if (bmiRange === "Overweight" || bmiRange === "Obese") {
+    targetedWeight = weight - idealWeight;
+  }
+  targetedWeight = targetedWeight.toFixed(2);
+
+  resultDiv.innerHTML = "Name: " + name + "<br> Age: " + age + "<br> Gender: " + gender + "<br> Lifestyle: " + lifestyle + "<br><br> Your BMI is " + bmi + "<br> BMI Range: " + bmiRange + "<br> Interpretation: " + interpretation + "<br><br> Ideal Weight: " + idealWeight + " kg" + "<br> Targeted Weight: " + targetedWeight + " kg";
 }
 
 function switchWeightUnit() {
@@ -88,3 +104,4 @@ function switchWeightUnit() {
     weightLabel.innerHTML = "Weight (lbs):";
   }
 }
+
